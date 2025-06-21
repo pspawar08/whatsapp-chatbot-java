@@ -5,24 +5,25 @@ import com.assignment.whatsappchatbot.model.ChatMessage;
 import com.assignment.whatsappchatbot.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/chat")
+@RequestMapping("/")
 public class ChatController {
     @Autowired
     private ChatService chatService;
 
-    @PostMapping
+    @GetMapping
+    public String home() {
+        return " WhatsApp Chatbot Backend is deployed successfully on Render!";
+    }
+    @PostMapping("/api/chat")
     public String receiveMessage(@RequestBody ChatMessage message) {
         chatService.saveMessage(message);
         return "Message received!";
     }
 
-    @PostMapping("/webhook")
+    @PostMapping("/api/chat/webhook")
     public ResponseEntity<String> simulateWhatsAppWebhook(@RequestBody WhatsAppPayload payload) {
         try {
             WhatsAppPayload.Message message = payload
