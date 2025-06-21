@@ -15,7 +15,23 @@ public class ChatController {
 
     @GetMapping
     public String home() {
-        return " WhatsApp Chatbot Backend is deployed successfully on Render!";
+        return  """
+            <html>
+                <body style='font-family: sans-serif; padding: 20px;'>
+                    <h2>WhatsApp Chatbot Backend is Live on Render</h2>
+                    <p>This Spring Boot backend accepts and stores WhatsApp messages in Firebase Realtime DB.</p>
+                    <p>You can test the API using the Swagger documentation below:</p>
+                    <a href='/swagger-ui.html' target='_blank' style='
+                        display: inline-block;
+                        margin-top: 10px;
+                        padding: 10px 15px;
+                        background-color: #4CAF50;
+                        color: white;
+                        text-decoration: none;
+                        border-radius: 4px;'>Open Swagger UI</a>
+                </body>
+            </html>
+        """;
     }
     @PostMapping("/api/chat")
     public String receiveMessage(@RequestBody ChatMessage message) {
